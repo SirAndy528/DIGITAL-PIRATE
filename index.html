@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bajak Laut Digital</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: lime;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+    }
+
+    .loading {
+      font-size: 20px;
+      margin-top: 40px;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+
+    #mainContent {
+      display: none;
+      margin-top: 20px;
+    }
+
+    img {
+      width: 90%;
+      max-width: 500px;
+      margin-top: 10px;
+    }
+
+    audio {
+      display: none;
+    }
+
+    button {
+      background: #8B0000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading" id="loadingText">Memuat sistem...</div>
+
+  <div id="mainContent">
+    <h1 style="color:red;">Sistem Telah Dibajak!</h1>
+    <img src="pirate flag.jpg" alt="Bendera Bajak Laut">
+    <p>Ini hanya simulasi edukasi digital</p>
+    <button id="playBtn">Putar Efek Suara</button>
+  </div>
+
+  <!-- Musik latar -->
+  <audio id="backgroundAudio" loop>
+    <source src="Savfk.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Suara bajak laut tertawa -->
+  <audio id="pirateSound">
+    <source src="pirate sound.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // Tampilkan konten utama setelah delay
+    setTimeout(() => {
+      document.getElementById("loadingText").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+      
+      // Setup audio playback
+      const playBtn = document.getElementById('playBtn');
+      const bgAudio = document.getElementById('backgroundAudio');
+      const pirateAudio = document.getElementById('pirateSound');
+      
+      playBtn.addEventListener('click', function() {
+        // Play background music
+        bgAudio.play().catch(e => console.log("Error audio:", e));
+        
+        // Play pirate sound after short delay
+        setTimeout(() => {
+          pirateAudio.play().catch(e => console.log("Error audio:", e));
+        }, 300);
+        
+        this.textContent = "Efek Diaktifkan!";
+        this.style.background = "#FF0000";
+      });
+    }, 3000);
+  </script>
+</body>
+</html>
